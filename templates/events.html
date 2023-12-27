@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse click records</title>
+</head>
+<body>
+    {% if all_events != [] %}
+        {% for event in all_events %}
+            <li>
+                Clicked at: {{ event['time'] }} <br>
+                Mouse position: ({{ event['x'] }}, {{ event['y'] }}) <br>   
+                <img src="{{ event['image_data'] }}" alt="picture" width="300" height="200">
+                <p>-------------------------------------------------------------------</p>
+            </li> 
+        {% endfor %}
+    {% else %}
+        <h2>No events recorded yet</h2>
+    {% endif %}
+</body>
+</html>

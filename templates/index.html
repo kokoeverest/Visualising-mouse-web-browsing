@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Example</title>
+</head>
+<body>
+    <div style="text-align: center;" id="output"></div>
+    <br>
+    <h2 style="text-align: center;">Close this tab to stop recording</h2>
+    
+    <script type="text/javascript">
+        
+        const ws = new WebSocket('ws://127.0.0.1:8000/ws');
+
+        ws.onopen = function(event) {
+            console.log('WebSocket connection established.');
+        };
+
+        ws.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            console.log('Received data:', data);
+            
+            document.getElementById('output').innerHTML = `
+                Mouse Position: (${data.mouse_position.x}, ${data.mouse_position.y})
+            `;
+        };
+        
+        ws.onerror = function(event) {
+            console.error('WebSocket error:', event);
+        };
+        
+        ws.onclose = function(event) {
+            console.log('WebSocket connection closed.');
+        };
+    </script>
+</body>
+</html>
